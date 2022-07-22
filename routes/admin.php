@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ReplyController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\FAQController;
+use App\Http\Controllers\Admin\PaymentMethodController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,7 @@ Route::group(
         Route::resource('/sub-categories', SubCategoryController::class);
         Route::resource('/become-merchants', BecomeMerchantController::class);
         Route::resource('/faq', FAQController::class);
+        Route::resource('/payment-methods', PaymentMethodController::class);
         Route::get('/become-merchants/{id}/activated', [BecomeMerchantController::class, 'activated']);
         Route::get('/become-merchants/{id}/deactivated', [BecomeMerchantController::class, 'deactivated']);
     });
