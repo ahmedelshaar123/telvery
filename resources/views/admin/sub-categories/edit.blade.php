@@ -1,13 +1,13 @@
 @extends('layouts.admin.app',[
             'page_header'       => trans("admin.telvery"),
-            'page_description'       => trans("admin.add"),
+            'page_description'       => trans("admin.edit"),
                                 ])
 @section('content')
     <div class="ibox-content">
     @include('layouts.partials.validation-errors')
     <!-- form start -->
         {!! Form::model($subCategory,[
-                                'action'=>'App\Http\Controllers\Admin\SubCategoryController@update',
+                                'action'=>['App\Http\Controllers\Admin\SubCategoryController@update', $subCategory->id],
                                 'id'=>'myForm',
                                 'role'=>'form',
                                 'method'=>'PUT',

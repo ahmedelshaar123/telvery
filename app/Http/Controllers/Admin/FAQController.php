@@ -17,7 +17,10 @@ class FAQController extends Controller
     public function index()
     {
         $faq = Question::all();
-        return view('admin.faq.index', compact('faq' ));
+        $lang = \LaravelLocalization::getCurrentLocale();
+        $question = "question_$lang";
+        $answer = "answer_$lang";
+        return view('admin.faq.index', compact('faq', 'question', 'answer'));
 
     }
 
@@ -60,15 +63,15 @@ class FAQController extends Controller
      */
     public function edit($id)
     {
-        $faq = Question::findOrFail($id);
-        return view('admin.faq.edit', compact('faq'));
+        $fa = Question::findOrFail($id);
+        return view('admin.faq.edit', compact('fa'));
 
     }
 
     public function update(FAQRequest $request, $id)
     {
-        $faq=Question::findOrFail($id);
-        $faq->update($request->all());
+        $fa=Question::findOrFail($id);
+        $fa->update($request->all());
         session()->flash('success', trans("admin.updated_successfully"));
         return redirect(route('faq.index'));
 
