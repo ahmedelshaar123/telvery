@@ -21,7 +21,7 @@
                     <div class="form-group">
                         @if($staticPage->type == 'textarea')
                             <label for="{{$staticPage->key}}">{{$staticPage->$name}}</label>
-                            <textarea name="{{$staticPage->key}}">
+                            <textarea class="form-control myTextArea" name="{{$staticPage->key}}">
                                 {{$staticPage->$value}}
                             </textarea>
                         @endif
