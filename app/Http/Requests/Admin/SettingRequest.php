@@ -26,6 +26,7 @@ class SettingRequest extends FormRequest
         return [
             'address' => 'nullable|max:255',
             'title' => 'nullable|max:255',
+            'footer_desc' => 'nullable|max:255',
             'facebook_url' => 'nullable|url',
             'twitter_url' => 'nullable|url',
             'instagram_url' => 'nullable|url',

@@ -67,7 +67,7 @@ class SettingsTableSeeder extends Seeder
             ],
 
             [
-                'name_ar' => 'العنوان',
+                'name_ar' => 'عنوان الموقع',
                 'name_en' => 'Address',
                 'value_ar' => 'شارع جيهان المنصورة آخر شارع المنصورة',
                 'value_en' => 'Gehan Street, End Of Mansoura Street',
@@ -76,12 +76,20 @@ class SettingsTableSeeder extends Seeder
             ],
 
             [
-                'name_ar' => 'العنوان',
+                'name_ar' => 'عنوان الصفحة',
                 'name_en' => 'Title',
                 'value_ar' => 'العنوان',
                 'value_en' => 'Title',
                 'type' => 'text',
                 'key' => 'title',
+            ],
+            [
+                'name_ar' => 'وصف ذيل الصحة',
+                'name_en' => 'Footer Description',
+                'value_ar' => 'الذيل',
+                'value_en' => 'Footer',
+                'type' => 'text',
+                'key' => 'footer_desc',
             ],
             [
                 'name_ar' => 'خط العرض',

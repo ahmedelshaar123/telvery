@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\FAQController;
 use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\StaticPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,7 +50,9 @@ Route::group(
         Route::resource('/payment-methods', PaymentMethodController::class);
         Route::get('/become-merchants/{id}/activated', [BecomeMerchantController::class, 'activated']);
         Route::get('/become-merchants/{id}/deactivated', [BecomeMerchantController::class, 'deactivated']);
-        Route::get('settings', [SettingController::class, 'index']);
-        Route::put('update-settings', [SettingController::class, 'update']);
+        Route::get('/settings', [SettingController::class, 'index']);
+        Route::put('/update-settings', [SettingController::class, 'update']);
+        Route::get('/static-pages', [StaticPageController::class, 'index']);
+        Route::put('/update-static-pages', [StaticPageController::class, 'update']);
     });
 });

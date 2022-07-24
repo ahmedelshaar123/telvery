@@ -1,5 +1,5 @@
 @extends('layouts.admin.app',[
-                                'page_header'       => trans('admin.site'),
+                                'page_header'       => trans('admin.telvery'),
                                 'page_description'  => trans('admin.settings')
                                 ])
 @push('styles')
@@ -7,22 +7,20 @@
           integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
           crossorigin=""/>
 @endpush
-@inject('setting', 'App\Models\Setting')
+@inject('sett', 'App\Models\Setting')
 
 @section('content')
     <div class="ibox-content">
     @include('layouts.partials.validation-errors')
         <!-- form start -->
-        {!! Form::model($setting,[
-                                'action'=>['App\Http\Controllers\Admin\SettingController@update',$setting->id],
+        {!! Form::model($sett,[
+                                'action'=>'App\Http\Controllers\Admin\SettingController@update',
                                 'id'=>'myForm',
                                 'role'=>'form',
                                 'method'=>'PUT',
                                 ])!!}
 
         <div class="box-body">
-            @include('layouts.partials.validation-errors')
-
             @foreach($settings as $setting)
                 <div class="form-body">
                     <div class="form-group">
