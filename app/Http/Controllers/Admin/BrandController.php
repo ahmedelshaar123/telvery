@@ -92,7 +92,7 @@ class BrandController extends Controller
     public function destroy($id)
     {
         $brand = Brand::findOrFail($id);
-        if($brand->products()->count()) {
+        if($brand->products()->count() || $brand->coupons()->count()) {
             return response()->json("not-delete");
         }
         $brand->delete();

@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\FAQController;
 use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\StaticPageController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\UserController;
 
 /*
@@ -49,6 +50,7 @@ Route::group(
         Route::resource('/become-merchants', BecomeMerchantController::class);
         Route::resource('/faq', FAQController::class);
         Route::resource('/payment-methods', PaymentMethodController::class);
+        Route::resource('/coupons', CouponController::class);
         Route::get('/become-merchants/{id}/activated', [BecomeMerchantController::class, 'activated']);
         Route::get('/become-merchants/{id}/deactivated', [BecomeMerchantController::class, 'deactivated']);
         Route::get('/settings', [SettingController::class, 'index']);

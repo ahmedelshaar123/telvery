@@ -15,4 +15,9 @@ class Brand extends Model
     {
         return $this->hasMany('App\Models\Product');
     }
+
+    public function coupons()
+    {
+        return $this->hasMany('App\Models\Coupon');
+    }
 }
