@@ -10,7 +10,7 @@ class CreatePhotosTable extends Migration {
 		Schema::create('photos', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('path');
-			$table->enum('type', array('3d', 'image'));
+			$table->enum('type', array('image', 'images', '3d'));
 			$table->integer('photoable_id');
 			$table->string('photoable_type');
 			$table->timestamps();

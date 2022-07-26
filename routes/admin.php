@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\FAQController;
 use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\StaticPageController;
+use App\Http\Controllers\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,5 +55,11 @@ Route::group(
         Route::put('/update-settings', [SettingController::class, 'update']);
         Route::get('/static-pages', [StaticPageController::class, 'index']);
         Route::put('/update-static-pages', [StaticPageController::class, 'update']);
+        Route::resource('users', UserController::class);
+        Route::get('users/{email}/{phone}/create', [UserController::class, 'create2']);
+        Route::get('users/{id}/activated', [UserController::class, 'activated']);
+        Route::get('users/{id}/deactivated', [UserController::class, 'deactivated']);
+        Route::get('users/edit-profile/{id}',[UserController::class, 'editProfile']);
+        Route::put('users/update-profile/{id}',[UserController::class, 'updateProfile']);
     });
 });

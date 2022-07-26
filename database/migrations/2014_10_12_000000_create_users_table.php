@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->text('desc_en')->nullable();
             $table->boolean('is_active')->default(0);
             $table->string('company_name')->nullable();
-            $table->string('company_age')->nullable();
+            $table->date('company_age')->nullable();
             $table->string('facebook_url')->nullable();
             $table->string('google_url')->nullable();
             $table->string('instagram_url')->nullable();
