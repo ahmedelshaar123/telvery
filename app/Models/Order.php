@@ -44,4 +44,8 @@ class Order extends Model
     {
         return $this->hasMany('App\Models\OrderProduct');
     }
+    public function orderStatuses()
+    {
+        return $this->hasMany('App\Models\OrderStatus');
+    }
 }

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\OrderProduct;
+use App\Models\OrderStatus;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -12,9 +15,37 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $user=auth()->user();
+        if ($user->hasRole('admin')){
+            $orders = Order::where(function ($query) use ($request) {
+                if ($request->order_id) {
+                    $query->where('id', $request->order_id);
+                }
+                if ($request->status) {
+                    $query->where('status', $request->status);
+                }
+                if ($request->from && $request->to) {
+                    $query->whereDate('created_at', '>=', $request->from);
+                    $query->whereDate('created_at', '<=', $request->to);
+                }
+            })->latest()->get();
+        }else{
+            $orders = Order::where('user_id',$user->id)->orWhere('user_id',$user->parent_id)->where(function ($query) use ($request) {
+                if ($request->order_id) {
+                    $query->where('id', $request->order_id);
+                }
+                if ($request->status) {
+                    $query->where('status', $request->status);
+                }
+                if ($request->from && $request->to) {
+                    $query->whereDate('created_at', '>=', $request->from);
+                    $query->whereDate('created_at', '<=', $request->to);
+                }
+            })->latest()->get();
+        }
+        return view('admin.orders.index', compact("orders"));
     }
 
     /**
@@ -46,7 +77,9 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        $order = Order::findOrFail($id);
+        $orderProducts = OrderProduct::where('order_id', $id)->get();
+        return view('admin.orders.show', compact('order','orderProducts'));
     }
 
     /**
@@ -81,5 +114,15 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function setOrderStatus(Request $request, $id){
+        Order::findOrFail($id)->update(['status' => $request->status]);
+        OrderStatus::create([
+            'order_id' => $id,
+            'status' => $request->status,
+        ]);
+        session()->flash('success', trans("Admin.updated_successfully"));
+        return back();
     }
 }
