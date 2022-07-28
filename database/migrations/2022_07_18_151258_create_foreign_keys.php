@@ -99,12 +99,22 @@ class CreateForeignKeys extends Migration {
 						->onUpdate('cascade');
 		});
 		Schema::table('orders', function(Blueprint $table) {
+			$table->foreign('user_id')->references('id')->on('users')
+						->onDelete('cascade')
+						->onUpdate('cascade');
+		});
+		Schema::table('orders', function(Blueprint $table) {
 			$table->foreign('coupon_id')->references('id')->on('coupons')
 						->onDelete('cascade')
 						->onUpdate('cascade');
 		});
 		Schema::table('orders', function(Blueprint $table) {
 			$table->foreign('shipping_id')->references('id')->on('shippings')
+						->onDelete('cascade')
+						->onUpdate('cascade');
+		});
+		Schema::table('orders', function(Blueprint $table) {
+			$table->foreign('payment_method_id')->references('id')->on('payment_methods')
 						->onDelete('cascade')
 						->onUpdate('cascade');
 		});
@@ -207,10 +217,16 @@ class CreateForeignKeys extends Migration {
 			$table->dropForeign('orders_client_id_foreign');
 		});
 		Schema::table('orders', function(Blueprint $table) {
+			$table->dropForeign('orders_user_id_foreign');
+		});
+		Schema::table('orders', function(Blueprint $table) {
 			$table->dropForeign('orders_coupon_id_foreign');
 		});
 		Schema::table('orders', function(Blueprint $table) {
 			$table->dropForeign('orders_shipping_id_foreign');
+		});
+		Schema::table('orders', function(Blueprint $table) {
+			$table->dropForeign('orders_payment_method_id_foreign');
 		});
 		Schema::table('order_statuses', function(Blueprint $table) {
 			$table->dropForeign('order_statuses_order_id_foreign');

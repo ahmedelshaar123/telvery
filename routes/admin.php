@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\StaticPageController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,8 @@ Route::group(
         Route::resource('/coupons', CouponController::class);
         Route::resource('/coupons', CouponController::class);
         Route::resource('/coupons', CouponController::class);
+        Route::resource('/orders', OrderController::class);
+        Route::put('/order-status/{id}', [OrderController::class, 'setOrderStatus'])->name('order-status');
         Route::resource('/clients', ClientController::class);
         Route::get('/clients/{id}/activated', [ClientController::class, 'activated']);
         Route::get('/clients/{id}/deactivated', [ClientController::class, 'deactivated']);
