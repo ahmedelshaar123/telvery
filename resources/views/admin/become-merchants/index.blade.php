@@ -25,8 +25,11 @@
                                         {{trans("admin.add_merchant")}} </a>
 
                                 <td class="text-center">
-                                    <a href="become-merchants/{{$becomeMerchant->id}}/deactivated" class="btn btn-danger"><i class="fa fa-close"></i> {{trans("admin.deactivated")}}</a>
-                                    <a href="become-merchants/{{$becomeMerchant->id}}/activated" class="btn btn-success"><i class="fa fa-check"></i>{{trans("admin.activated")}}</a>
+                                    @if($becomeMerchant->is_active == 1)
+                                        <a href="become-merchants/{{$becomeMerchant->id}}/deactivated" class="btn btn-danger"><i class="fa fa-close"></i> {{trans("admin.deactivated")}}</a>
+                                    @else
+                                        <a href="become-merchants/{{$becomeMerchant->id}}/activated" class="btn btn-success"><i class="fa fa-check"></i>{{trans("admin.activated")}}</a>
+                                    @endif
                                 </td>
 
                             </tr>

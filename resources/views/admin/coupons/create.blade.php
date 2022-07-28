@@ -40,8 +40,8 @@
                 ]) !!}
             </div>
             <div class="form-group">
-                <label for="id">{{trans("admin.choose_brand")}}</label>
-                <select name="brand_id" class="form-control" required>
+                <label for="brand_id">{{trans("admin.choose_brand")}}</label>
+                <select name="brand_id" class="form-control">
                     <option disabled selected value="">{{trans("admin.choose_brand")}}</option>
                     @foreach($brands as $brand)
                         <option value="{{$brand->id}}">{{$brand->$name}}</option>
