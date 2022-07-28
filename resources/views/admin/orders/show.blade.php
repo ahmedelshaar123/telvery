@@ -1,6 +1,6 @@
 @extends('layouts.admin.app',[
-        'page_header'       => "Telvery",
-        'page_description'  => "تفاصيل الطلب"
+        'page_header'       => trans("admin.telvery"),
+        'page_description'  => trans("admin.order_details")
   ])
 @section('content')
     <div class="ibox-content">
@@ -10,8 +10,8 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <h2 class="page-header">
-                            <i class="fa fa-globe"></i> تفاصيل طلب # {{$record->id}}
-                            <small class="pull-left"><i class="fa fa-calendar-o"></i> {{$record->created_at->toFormattedDateString()}}
+                            <i class="fa fa-globe"></i> {{trans("admin.order_details")}} # {{$order->id}}
+                            <small class="pull-left"><i class="fa fa-calendar-o"></i> {{$order->created_at->toFormattedDateString()}}
                             </small>
                         </h2>
                     </div><!-- /.col -->
@@ -19,75 +19,72 @@
                 <!-- info row -->
                 <div class="row invoice-info">
                     <div class="col-sm-4 invoice-col">
-                        طلب من
+                        {{trans("admin.order_from")}}
                         <address>
                             <i class="fa fa-angle-left"
-                               aria-hidden="true"></i> الاسم
-                            : {{optional($record->client)->first_name . ' ' . optional($record->client)->last_name}}
+                               aria-hidden="true"></i> {{trans("admin.name")}}
+                            : {{optional($order->client)->first_name . ' ' . optional($order->client)->last_name}}
                             <br>
-                            <i class="fa fa-angle-left" aria-hidden="true"></i> الهاتف
-                            : {{optional($record->shipping)->phone}}
+                            <i class="fa fa-angle-left" aria-hidden="true"></i> {{trans("admin.phone")}}
+                            : {{optional($order->shipping)->phone}}
                             <br>
-                            <i class="fa fa-angle-left" aria-hidden="true"></i> البريد الإلكترونى
-                            : {{optional($record->client)->email}}
+                            <i class="fa fa-angle-left" aria-hidden="true"></i>{{trans("admin.email")}}
+                            : {{optional($order->client)->email}}
                             <br>
-                            <i class="fa fa-angle-left" aria-hidden="true"></i>  العنوان
-                            : {{optional($record->shipping)->address.' '.optional($record->shipping->governorate)->name_ar}}
+                            <i class="fa fa-angle-left" aria-hidden="true"></i>  {{trans("admin.address")}}
+                            : {{optional($order->shipping)->address.', '.optional($order->shipping->governorate)->name_ar}}
                             <br>
-                            <i class="fa fa-angle-left" aria-hidden="true"></i>طريقه الدفع
-                            : {{optional($record->PaymentMethod)->name_ar}}
+                            <i class="fa fa-angle-left" aria-hidden="true"></i>{{trans("admin.payment_method")}}
+                            : {{optional($order->PaymentMethod)->$name}}
                             <br>
-                            @if(!is_null($record->transaction_id))
-                                <i class="fa fa-angle-left" aria-hidden="true"></i>رقم العمليه التجاريه
-                                : {{$record->transaction_id}}
+                            @if(!is_null($order->transaction_id))
+                                <i class="fa fa-angle-left" aria-hidden="true"></i>{{trans("admin.transaction_id")}}
+                                : {{$order->transaction_id}}
                                 <br>
                             @endif
-                            @if(!is_null($record->coupon))
-                                <i class="fa fa-angle-left" aria-hidden="true"></i>الكوبون
-                                : {{optional($record->coupon)->code}}
+                            @if(!is_null($order->coupon))
+                                <i class="fa fa-angle-left" aria-hidden="true"></i>{{trans("admin.coupon")}}
+                                : {{optional($order->coupon)->code}}
                                 <br>
                             @endif
                             <br>
-                            <i class="fa fa-angle-left" aria-hidden="true"></i>سعر الشحن
-                            : {{$record->delivery_cost}} جنيه
+                            <i class="fa fa-angle-left" aria-hidden="true"></i>{{trans("admin.delivery_cost")}}
+                            : {{$order->delivery_cost}} {{trans("admin.pound")}}
                             <br>
-                            <i class="fa fa-angle-left" aria-hidden="true"></i>السعر الكلي
-                            : {{$record->total_price}} جنيه
+                            <i class="fa fa-angle-left" aria-hidden="true"></i>{{trans("admin.total_price")}}
+                            : {{$order->total_price}} {{trans("admin.pound")}}
                             <br>
                         </address>
                     </div><!-- /.col -->
                     <div class="col-sm-4 invoice-col">
                         @foreach($orderProducts as $orderProduct)
                             <i class="fa fa-angle-left"
-                               aria-hidden="true"></i>  رقم المنتج
-                            :<strong> #{{$orderProduct->product_id}}</strong><br>
+                               aria-hidden="true"></i>{{trans("admin.product_name")}}
+                            :<strong> {{optional($orderProduct->product)->$name}}</strong><br>
 
                             <i class="fa fa-angle-left"
-                               aria-hidden="true"></i>اسم المنتج
-                            :<strong> {{optional($orderProduct->product)->name_ar}}</strong><br>
+                               aria-hidden="true"></i>  {{trans("admin.price")}}
+                            :<strong> {{$orderProduct->price}}  {{trans("admin.pound")}}</strong><br>
 
                             <i class="fa fa-angle-left"
-                               aria-hidden="true"></i>  السعر
-                            :<strong> {{$orderProduct->price}} جنيه</strong><br>
-
-                            <i class="fa fa-angle-left"
-                               aria-hidden="true"></i>الكميه
+                               aria-hidden="true"></i>{{trans("admin.quantity")}}
                             :<strong> {{$orderProduct->quantity}}</strong><br>
-
-                            <i class="fa fa-angle-left"
-                               aria-hidden="true"></i>اسم التاجر
-                            :<strong> {{optional($orderProduct->product->user)->name}}</strong><br>
-                            <br>
+                            @if($order->user()->hasRole("admin"))
+                                <i class="fa fa-angle-left"
+                                   aria-hidden="true"></i>{{trans("admin.merchant")}}
+                                :<strong> {{optional($orderProduct->product->user)->name}}</strong><br>
+                                <br>
+                            @endif
                         @endforeach
                     </div><!-- /.col -->
                     <address>
-                        <i class="fa fa-angle-left" aria-hidden="true"></i><b> رقم الطلب: #{{$record->id}}</b><br>
+                        <i class="fa fa-angle-left" aria-hidden="true"></i><b> {{trans("admin.order_id")}}: #{{$order->id}}</b><br>
                     </address>
                 </div><!-- /.row -->
                 <div class="row no-print">
                     <div class="col-xs-12">
                         <a href="" class="btn btn-default" id="print-all">
-                            <i class="fa fa-print"></i> طباعة </a>
+                            <i class="fa fa-print"></i> {{trans("admin.print")}} </a>
                     </div>
                 </div>
             </section><!-- /.content -->

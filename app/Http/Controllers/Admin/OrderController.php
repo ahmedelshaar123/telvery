@@ -31,7 +31,7 @@ class OrderController extends Controller
                     $query->whereDate('created_at', '>=', $request->from);
                     $query->whereDate('created_at', '<=', $request->to);
                 }
-            })->latest()->get();
+            })->latest()->paginate(10);
         }else{
             $orders = Order::where('user_id',$user->id)->orWhere('user_id',$user->parent_id)->where(function ($query) use ($request) {
                 if ($request->order_id) {
@@ -44,7 +44,7 @@ class OrderController extends Controller
                     $query->whereDate('created_at', '>=', $request->from);
                     $query->whereDate('created_at', '<=', $request->to);
                 }
-            })->latest()->get();
+            })->latest()->paginate(10);
         }
         return view('admin.orders.index', compact("orders"));
     }
@@ -78,9 +78,11 @@ class OrderController extends Controller
      */
     public function show($id)
     {
+        $lang = \LaravelLocalization::getCurrentLocale();
+        $name = "name_$lang";
         $order = Order::findOrFail($id);
         $orderProducts = OrderProduct::where('order_id', $id)->get();
-        return view('admin.orders.show', compact('order','orderProducts'));
+        return view('admin.orders.show', compact('name', 'order','orderProducts'));
     }
 
     /**
