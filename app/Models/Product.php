@@ -11,7 +11,7 @@ class Product extends Model
     public $timestamps = true;
     protected $fillable = array('name_ar', 'name_en', 'best_seller', 'type', 'color', 'in_stock',
         'price_before', 'price_after', 'sku', 'detail_ar', 'detail_en', 'specification_ar',
-        'specification_en', 'video_url', 'black_friday', 'today_deal', 'brand_id', 'category_id', 'user_id');
+        'specification_en', 'video_url', 'black_friday', 'today_deal', 'brand_id', 'category_id', 'user_id', 'views');
 
     public function brand()
     {

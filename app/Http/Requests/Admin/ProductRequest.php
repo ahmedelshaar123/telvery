@@ -40,6 +40,9 @@ class ProductRequest extends FormRequest
                     'category_id' => 'required|exists:categories,id',
                     'brand_id' => 'nullable|exists:brands,id',
                     'color' => 'required',
+                    'type' => 'nullable|max:255',
+                    'black_friday' => 'nullable',
+                    'today_deal' => 'nullable',
                     'paths' => 'required|array',
                     'paths.*' => 'image|mimes:jpg,jpeg,png,gif|max:2048',
                     '3d' => 'required|array',
@@ -48,6 +51,8 @@ class ProductRequest extends FormRequest
                     'delivery_cost.*' => 'numeric',
                     'governorate_id' => 'required|array',
                     'governorate_id.*' => 'exists:governorates,id',
+                    'des_product_id' => 'required|array',
+                    'des_product_id.*' => 'exists:products,id',
                 ];
             case "PUT":
             case "PATCH":
@@ -66,6 +71,9 @@ class ProductRequest extends FormRequest
                     'category_id' => 'required|exists:categories,id',
                     'brand_id' => 'nullable|exists:brands,id',
                     'color' => 'required',
+                    'type' => 'nullable|max:255',
+                    'black_friday' => 'nullable',
+                    'today_deal' => 'nullable',
                     'paths' => 'array',
                     'paths.*' => 'image|mimes:jpg,jpeg,png,gif|max:2048',
                     '3d' => 'array',
@@ -74,6 +82,8 @@ class ProductRequest extends FormRequest
                     'delivery_cost.*' => 'numeric',
                     'governorate_id' => 'required|array',
                     'governorate_id.*' => 'exists:governorates,id',
+                    'des_product_id' => 'required|array',
+                    'des_product_id.*' => 'exists:products,id',
                 ];
         }
     }
