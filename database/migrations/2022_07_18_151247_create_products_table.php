@@ -22,11 +22,11 @@ class CreateProductsTable extends Migration {
 			$table->text('detail_en');
 			$table->text('specification_ar');
 			$table->text('specification_en');
-			$table->string('video')->nullable();
+			$table->string('video_url')->nullable();
 			$table->boolean('black_friday')->default(0);
 			$table->boolean('today_deal')->default(0);
 			$table->integer('views')->default('0');
-			$table->integer('brand_id')->unsigned();
+			$table->integer('brand_id')->unsigned()->nullable();
 			$table->integer('category_id')->unsigned();
 			$table->bigInteger('user_id')->unsigned();
 			$table->timestamps();
