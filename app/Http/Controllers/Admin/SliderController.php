@@ -16,8 +16,10 @@ class SliderController extends Controller
      */
     public function index()
     {
+        $lang = \LaravelLocalization::getCurrentLocale();
+        $title = "title_$lang";
         $sliders = Slider::all();
-        return view('admin.sliders.index', compact("sliders"));
+        return view('admin.sliders.index', compact('title',"sliders"));
     }
 
     /**
@@ -80,7 +82,7 @@ class SliderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SliderRequest $request, $id)
     {
         $slider = Slider::findOrFail($id);
         $slider->update($request->except('path'));
