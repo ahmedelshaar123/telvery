@@ -59,7 +59,7 @@
                 <div class="table-responsive">
                     <table class="data-table table table-bordered">
                         <thead>
-                        <th class="text-center">#</th>
+                        <th class="text-center">{{trans("admin.order_id")}}</th>
                         <th class="text-center">{{trans("admin.client")}}</th>
                         <th class="text-center">{{trans("admin.shipping")}}</th>
                         <th class="text-center">{{trans("admin.phone")}}</th>
@@ -72,7 +72,7 @@
                         <tbody>
                         @foreach($orders as $order)
                             <tr>
-                                <td class="text-center"><a href="{{route('orders.show',$order->id)}}"># {{$order->id}}</a></td>
+                                <td class="text-center">#{{$order->id}}</td>
                                 <td class="text-center">{{optional($order->client)->first_name . ' ' . optional($order->client)->last_name}}</td>
                                 <td class="text-center">{{optional($order->shipping)->address}}</td>
                                 <td class="text-center">{{optional($order->shipping)->phone}}</td>
