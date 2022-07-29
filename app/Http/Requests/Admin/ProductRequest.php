@@ -51,8 +51,10 @@ class ProductRequest extends FormRequest
                     'delivery_cost.*' => 'numeric',
                     'governorate_id' => 'required|array',
                     'governorate_id.*' => 'exists:governorates,id',
-                    'des_product_id' => 'required|array',
-                    'des_product_id.*' => 'exists:products,id',
+                    'des_color_product_id' => 'nullable|array',
+                    'des_color_product_id.*' => 'exists:products,id',
+                    'des_size_product_id' => 'nullable|array',
+                    'des_size_product_id.*' => 'exists:products,id',
                 ];
             case "PUT":
             case "PATCH":
@@ -82,8 +84,10 @@ class ProductRequest extends FormRequest
                     'delivery_cost.*' => 'numeric',
                     'governorate_id' => 'required|array',
                     'governorate_id.*' => 'exists:governorates,id',
-                    'des_product_id' => 'required|array',
-                    'des_product_id.*' => 'exists:products,id',
+                    'des_color_product_id' => 'nullable|array',
+                    'des_color_product_id.*' => 'exists:products,id',
+                    'des_size_product_id' => 'nullable|array',
+                    'des_size_product_id.*' => 'exists:products,id',
                 ];
         }
     }
