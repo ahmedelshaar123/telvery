@@ -32,7 +32,7 @@
                             : {{optional($order->client)->email}}
                             <br>
                             <i class="fa fa-angle-left" aria-hidden="true"></i>  {{trans("admin.address")}}
-                            : {{optional($order->shipping)->address.', '.optional($order->shipping->governorate)->name_ar}}
+                            : {{optional($order->shipping)->address.', '.optional($order->shipping->governorate)->$name}}
                             <br>
                             <i class="fa fa-angle-left" aria-hidden="true"></i>{{trans("admin.payment_method")}}
                             : {{optional($order->PaymentMethod)->$name}}
