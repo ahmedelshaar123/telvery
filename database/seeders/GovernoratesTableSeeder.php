@@ -22,7 +22,7 @@ class GovernoratesTableSeeder extends Seeder
           [
               'name_ar' => "الغربية",
               'name_en' => "Algharbeyya",
-          ]
+          ],
         ];
         foreach ($values as $value) {
             Governorate::create($value);
