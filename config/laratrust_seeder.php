@@ -1,7 +1,17 @@
 <?php
 
 return [
-    'role_structure' => [
+    /**
+     * Control if the seeder should create a user per role while seeding the data.
+     */
+    'create_users' => false,
+
+    /**
+     * Control if all the laratrust tables should be truncated before running the seeder.
+     */
+    'truncate_tables' => true,
+
+    'roles_structure' => [
         'admin' => [
             'become_merchants' => 'r,ac,dc',
             'subscriptions' => 'r,d',
@@ -13,8 +23,8 @@ return [
             'payment_methods' => 'c,r,u,d',
             'brands' => 'c,r,u,d',
             'categories' => 'c,r,u,d',
-            'sub-categories' => 'c,r,u,d',
-            'products' => 'c,s,r,u,d',
+            'sub_categories' => 'c,r,u,d',
+            'products' => 's,r',
             'clients' => 'r,s,ac,dc',
             'reviews' => 'r,s,d',
             'replies' => 'd',
@@ -22,17 +32,17 @@ return [
             'orders' => 'r,s,u',
             'users' => 'c,r,u,d,ac,dc',
             'settings' => 'r,u',
+            'static_pages' => 'r,u',
         ],
         'user' => []
-        ,
     ],
+
     'permissions_map' => [
         'c' => 'create',
-        's' => 'show',
         'r' => 'read',
         'u' => 'update',
         'd' => 'delete',
         'ac' => 'activated',
-        'dc' => 'deactivated',
+        'dc' => 'deactivated'
     ]
 ];

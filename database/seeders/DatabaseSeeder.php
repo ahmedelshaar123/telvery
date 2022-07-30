@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(StaticPagesTableSeeder::class);
         $this->call(GovernoratesTableSeeder::class);
         $this->call(LaratrustSeeder::class);
+        $this->call(UsersTableSeeder::class);
     }
 }
