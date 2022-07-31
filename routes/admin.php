@@ -78,3 +78,4 @@ Route::group(
         Route::put('users/update-profile/{id}',[UserController::class, 'updateProfile']);
     });
 });
+Route::get('logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout']);
