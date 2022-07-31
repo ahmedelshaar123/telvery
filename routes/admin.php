@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SubscriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +58,7 @@ Route::group(
         Route::resource('/coupons', CouponController::class);
         Route::resource('/coupons', CouponController::class);
         Route::resource('/coupons', CouponController::class);
+        Route::resource('/subscriptions', SubscriptionController::class);
         Route::resource('/sliders', SliderController::class);
         Route::resource('/products', ProductController::class);
         Route::resource('/orders', OrderController::class);

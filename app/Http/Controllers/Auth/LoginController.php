@@ -47,8 +47,6 @@ class LoginController extends Controller
 
     public function credentials(Request $request)
     {
-
         return array_merge($request->only($this->username(), 'password'), ['is_active' => 1]);
-
     }
 }
