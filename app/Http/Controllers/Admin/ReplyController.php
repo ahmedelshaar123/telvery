@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Reply;
+use App\Models\Review;
 use Illuminate\Http\Request;
 
 class ReplyController extends Controller
@@ -47,7 +48,8 @@ class ReplyController extends Controller
      */
     public function show($id)
     {
-        //
+        $replies = Reply::where('review_id', $id)->get();
+        return view('admin.replies.show', compact('replies'));
     }
 
     /**

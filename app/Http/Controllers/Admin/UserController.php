@@ -19,12 +19,12 @@ class UserController extends Controller
      */
     public function index()
     {
-//        if(auth()->user()->hasRole('admin')) {
-//            $users=User::whereRoleIs('user')->get();
-//        }else{
-//            $users = User::where('parent_id', auth()->user()->id)->get();
-//        }
-//        return view('admin.users.index',compact('users'));
+        if(auth()->user()->hasRole('admin')) {
+            $users=User::whereRoleIs('user')->get();
+        }else{
+            $users = User::where('parent_id', auth()->user()->id)->get();
+        }
+        return view('admin.users.index',compact('users'));
     }
 
     /**
@@ -53,37 +53,38 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-//        if(auth()->user()->hasRole('admin')) {
-//            $parentId = 0;
-//        }else {
-//            $parentId = auth()->user()->id;
+        if (auth()->user()->hasRole('admin')) {
+            $parentId = 0;
+        } else {
+            $parentId = auth()->user()->id;
 //        }
-        $request->merge(['password' => bcrypt($request->password)]);
-        $user=User::create($request->except(['permissions','path','paths']));
-        foreach ($request->file('paths') as $file) {
+            $request->merge(['password' => bcrypt($request->password)]);
+            $user = User::create($request->except(['permissions', 'path', 'paths']));
+            foreach ($request->file('paths') as $file) {
+                $path = public_path();
+                $destinationPath = $path . '/uploads/users/'; // upload path
+                $image = $file;
+                $extension = $image->getClientOriginalExtension();
+                $name = time() . '' . rand(11111, 99999) . '.' . $extension;
+                $image->move($destinationPath, $name);
+                $user->photos()->create(['path' => 'uploads/users/' . $name, 'type' => 'images']);
+            }
             $path = public_path();
             $destinationPath = $path . '/uploads/users/'; // upload path
-            $image = $file;
-            $extension = $image->getClientOriginalExtension();
-            $name = time() . '' . rand(11111, 99999) . '.' . $extension;
-            $image->move($destinationPath, $name);
-            $user->photos()->create(['path' => 'uploads/users/' . $name, 'type' => 'images']);
+            $logo = $request->file('path');
+            $extension = $logo->getClientOriginalExtension(); // getting image extension
+            $name = time() . '' . rand(11111, 99999) . '.' . $extension; // renaming image
+            $logo->move($destinationPath, $name); // uploading file to given path
+            $user->photo()->create(['path' => 'uploads/users/' . $name, 'type' => 'image']);
+            $user->parent_id = $parentId;
+            $user->save();
+            $user->attachRole('user');
+            if (auth()->user()->hasRole('admin')) {
+                $user->syncPermissions($request->permissions);
+            }
+            session()->flash('success', "تم الاضافه بنجاح");
+            return redirect(route('users.index'));
         }
-        $path = public_path();
-        $destinationPath = $path . '/uploads/users/'; // upload path
-        $logo = $request->file('path');
-        $extension = $logo->getClientOriginalExtension(); // getting image extension
-        $name = time() . '' . rand(11111, 99999) . '.' . $extension; // renaming image
-        $logo->move($destinationPath, $name); // uploading file to given path
-        $user->photo()->create(['path' => 'uploads/users/' . $name,'type' => 'image']);
-//        $user->parent_id = $parentId;
-//        $user->save();
-//        $user->attachRole('user');
-//        if(auth()->user()->hasRole('admin')) {
-//            $user->syncPermissions($request->permissions);
-//        }
-        session()->flash('success', "تم الاضافه بنجاح");
-        return redirect(route('users.index'));
     }
 
     /**
@@ -120,9 +121,9 @@ class UserController extends Controller
     public function update(UserRequest $request, $id)
     {
         $user=User::findOrFail($id);
-//        if(auth()->user()->hasRole('admin')) {
-//            $user->syncPermissions($request->permissions);
-//        }
+        if(auth()->user()->hasRole('admin')) {
+            $user->syncPermissions($request->permissions);
+        }
         $user->update($request->except('path','paths'));
         if($request->hasFile('paths')) {
             foreach ($user->photos as $photo) {

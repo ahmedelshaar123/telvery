@@ -50,8 +50,7 @@ class ReviewController extends Controller
      */
     public function show($id)
     {
-        $replies = Review::findOrfail($id)->replies()->get();
-        return view('admin.reviews.show', compact('replies'));
+
     }
 
     /**

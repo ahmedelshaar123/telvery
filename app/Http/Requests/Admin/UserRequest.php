@@ -23,16 +23,16 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        switch($this->method) {
+        switch($this->method()) {
             case 'Post':
                 return [
                     'name'=>'required|unique:users,name',
                     'email'=>'required|unique:users,email',
                     'password'=>'required|min:6|max:20|confirmed',
-                    'phone'=>'required|unique:users,digits_between:10,12',
+                    'phone'=>'nullable|unique:users,phone|digits_between:10,12',
                     'address'=>'nullable|max:255',
-                    'desc_en'=>'nullable',
                     'desc_ar'=>'nullable',
+                    'desc_en'=>'nullable',
                     'facebook_url' => 'nullable|url|max:255',
                     'twitter_url' => 'nullable|url|max:255',
                     'google_url' => 'nullable|url|max:255',
@@ -40,9 +40,10 @@ class UserRequest extends FormRequest
                     'company_name' => 'nullable|max:255',
                     'company_age' => 'nullable|date',
                     'category_id' => 'nullable|exists:categories,id',
-                    'path'=>'required|image|mimes:png,jpg,jpeg,gif',
+                    'path'=>'required|image|mimes:png,jpg,jpeg,gif|max:2048',
                     'paths'=>'array',
-                    'paths.*'=>'image|mimes:png,jpg,jpeg,gif',
+                    'paths.*'=>'image|mimes:png,jpg,jpeg,gif|max:2048',
+                    'permissions'=>'required|array'
                 ];
             case 'PUT':
             case 'PATCH':
@@ -51,10 +52,10 @@ class UserRequest extends FormRequest
                     'name'=>'required|unique:users,name,' . $id,
                     'email'=>'required|unique:users,email,' . $id,
                     'password'=>'nullable|min:6|max:20|confirmed',
-                    'phone'=>'required|unique:users,digits_between:10,12,' . $id,
+                    'phone'=>'nullable|unique:users,phone|digits_between:10,12,' . $id,
                     'address'=>'nullable|max:255',
-                    'desc_en'=>'nullable',
                     'desc_ar'=>'nullable',
+                    'desc_en'=>'nullable',
                     'facebook_url' => 'nullable|url|max:255',
                     'twitter_url' => 'nullable|url|max:255',
                     'google_url' => 'nullable|url|max:255',
@@ -62,10 +63,10 @@ class UserRequest extends FormRequest
                     'company_name' => 'nullable|max:255',
                     'company_age' => 'nullable|date',
                     'category_id' => 'nullable|exists:categories,id',
-                    'path'=>'image|mimes:png,jpg,jpeg,gif',
+                    'path'=>'image|mimes:png,jpg,jpeg,gif|max:2048',
                     'paths'=>'array',
-                    'paths.*'=>'image|mimes:png,jpg,jpeg,gif',
-                    'permissions'=>'required|array'
+                    'paths.*'=>'image|mimes:png,jpg,jpeg,gif|max:2048',
+                    'permissions'=>'array'
                 ];
         }
     }

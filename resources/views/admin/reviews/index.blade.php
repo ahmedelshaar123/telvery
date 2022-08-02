@@ -33,7 +33,7 @@
                                 ?>
                                 <td class="text-center">{{$likes}}</td>
                                 <td class="text-center">{{$dislikes}}</td>
-                                <td class="text-center"><a href="{{url(route('reviews.show',$review->id))}}" class="btn btn-xs btn-info"><i class="fa fa-eye"></i></a></td>
+                                <td class="text-center"><a href="{{url(route('replies.show',$review->id))}}" class="btn btn-xs btn-info"><i class="fa fa-eye"></i></a></td>
                                 <td class="text-center">
                                     <button id="{{$review->id}}" data-token="{{ csrf_token() }}"
                                             data-route="{{route('reviews.destroy',$review->id)}}"
