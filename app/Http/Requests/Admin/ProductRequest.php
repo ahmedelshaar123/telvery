@@ -88,6 +88,8 @@ class ProductRequest extends FormRequest
                     'des_color_product_id.*' => 'exists:products,id',
                     'des_size_product_id' => 'nullable|array',
                     'des_size_product_id.*' => 'exists:products,id',
+                    'des_linked_product_id' => 'nullable|array',
+                    'des_linked_product_id.*' => 'exists:products,id',
                 ];
         }
     }
