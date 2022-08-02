@@ -1,0 +1,33 @@
+<?php
+
+return [
+    'become_merchants' => "Become merchants",
+    'subscriptions' => 'Subscriptions',
+    'contacts' => 'Contacts',
+    'questions' => 'Questions',
+    'governorates' => 'Governorates',
+    'coupons' => 'Coupons',
+    'sliders' => 'Sliders',
+    'payment_methods' => 'Payment Methods',
+    'brands' => 'Brands',
+    'categories' => "categories",
+    'sub_categories' => 'Sub Categories',
+    'products' => 'Products',
+    'clients' => "clients",
+    'reviews' => "Reviews",
+    'replies' => "Replies",
+    'orders' => "Orders",
+    'users' => "Users",
+    'settings' => "Settings",
+    'static_pages' => "Static Pages",
+    'teams' => "Teams",
+    'home' => "Home",
+    'create' => "Create",
+    'show' => "Show",
+    'read' => "Read",
+    'update' => "Update",
+    'delete' => "Delete",
+    'activated' => "Activated",
+    'deactivated' => "Deactivated",
+
+];

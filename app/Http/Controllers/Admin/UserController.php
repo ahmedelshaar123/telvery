@@ -53,11 +53,11 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        if (auth()->user()->hasRole('admin')) {
-            $parentId = 0;
-        } else {
+        if (auth()->user()->hasRole('user')) {
             $parentId = auth()->user()->id;
-//        }
+        }
+
+//
             $request->merge(['password' => bcrypt($request->password)]);
             $user = User::create($request->except(['permissions', 'path', 'paths']));
             foreach ($request->file('paths') as $file) {
@@ -85,7 +85,8 @@ class UserController extends Controller
             session()->flash('success', "تم الاضافه بنجاح");
             return redirect(route('users.index'));
         }
-    }
+
+
 
     /**
      * Display the specified resource.
@@ -137,7 +138,7 @@ class UserController extends Controller
                 $extension = $image->getClientOriginalExtension();
                 $name = time() . '' . rand(11111, 99999) . '.' . $extension;
                 $image->move($destinationPath, $name);
-                $user->photos()->update(['path' => 'uploads/users/' . $name, 'type' => 'image']);
+                $user->photos()->update(['path' => 'uploads/users/' . $name, 'type' => 'images']);
             }
         }
         if ($request->hasFile('path')) {
@@ -151,7 +152,6 @@ class UserController extends Controller
             $user->photo()->update(['path' => 'uploads/users/' . $name,'type' => 'image'
             ]);
         }
-        $user->save();
         session()->flash('success', 'تم التعديل بنجاح');
         return redirect(route('users.index'));
     }
@@ -195,7 +195,7 @@ class UserController extends Controller
                 $extension = $image->getClientOriginalExtension();
                 $name = time() . '' . rand(11111, 99999) . '.' . $extension;
                 $image->move($destinationPath, $name);
-                $user->photos()->create(['path' => 'uploads/users/' . $name, 'type' => 'normal']);
+                $user->photos()->create(['path' => 'uploads/users/' . $name, 'type' => 'images']);
             }
         }
         if ($request->hasFile('path')) {
@@ -209,7 +209,6 @@ class UserController extends Controller
                 $user->photo()->update(['path' => 'uploads/users/' . $name,'type' => 'image'
                 ]);
         }
-        $user->save();
         session()->flash('success', 'تم التعديل بنجاح');
         return back();
     }

@@ -6,15 +6,9 @@
     <div class="ibox-content">
         <div class="box-body">
             <div class="pull-right">
-                @if(auth()->user()->hasPermission('create_users'))
-                    <a href="{{route('users.create')}}" class="btn btn-primary">
-                        <i class="fa fa-plus"></i> اضافه مستخدم جديد
-                    </a>
-                @else
-                    <a href="#" class="btn btn-primary disabled">
-                        <i class="fa fa-plus"></i> اضافه مستخدم جديد
-                    </a>
-                @endif
+                <a href="{{route('users.create')}}" class="btn btn-primary">
+                    <i class="fa fa-plus"></i> اضافه مستخدم جديد
+                </a>
             </div>
             <div class="clearfix"></div>
             <br>
@@ -78,28 +72,15 @@
                                     @endif
                                 </td>
                                 <td class="text-center">
-                                    @if($user->activation)
-                                        @if(auth()->user()->hasPermission('deactivated_users'))
-                                            <a href="users/{{$user->id}}/deactivated" class="btn btn-danger"><i class="fa fa-close"></i> غير مفعل</a>
-                                        @else
-                                            <a href="#" class="btn btn-danger disabled"><i class="fa fa-close"></i> غير مفعل</a>
-                                        @endif
+                                    @if($user->is_Active)
+                                        <a href="users/{{$user->id}}/deactivated" class="btn btn-danger"><i class="fa fa-close"></i> غير مفعل</a>
                                     @else
-                                        @if(auth()->user()->hasPermission('activated_users'))
-                                            <a href="users/{{$user->id}}/activated" class="btn btn-success"><i class="fa fa-check"></i>مفعل </a>
-                                        @else
-                                            <a href="#" class="btn btn-success disabled"><i class="fa fa-check"></i>مفعل </a>
-                                        @endif
+                                        <a href="users/{{$user->id}}/activated" class="btn btn-success"><i class="fa fa-check"></i>مفعل </a>
                                     @endif
                                 </td>
-                                @if(auth()->user()->hasPermission('update_users'))
-                                    <td class="text-center"><a href="users/{{$user->id}}/edit"
-                                                               class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a>
-                                    </td>
-                                @else
-                                    <td class="text-center"><a href="#" class="btn btn-xs btn-success disabled"><i class="fa fa-edit"></i></a>
-                                    </td>
-                                @endif
+                                <td class="text-center"><a href="users/{{$user->id}}/edit"
+                                                           class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>

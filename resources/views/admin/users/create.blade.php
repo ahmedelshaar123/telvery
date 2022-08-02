@@ -79,41 +79,31 @@
                         </div>
                     @endif
                 </div>
-                @if(auth()->user()->hasRole('admin'))
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="category_id">اختر القسم </label>
-                            <select name="category_id" class="form-control" required>
-                                <option disabled selected value="">اختر القسم</option>
-                                @foreach($categories as $category)
-                                    <option value="{{$category->id}}">{{$category->name_ar}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="category_id">اختر القسم </label>
+                        <select name="category_id" class="form-control" required>
+                            <option disabled selected value="">اختر القسم</option>
+                            @foreach($categories as $category)
+                                <option value="{{$category->id}}">{{$category->name_ar}}</option>
+                            @endforeach
+                        </select>
                     </div>
-                @endif
+                </div>
+
             </div>
             <label for="path">الصور</label>
             <div class="input-group control-group img_div form-group">
                 <input type="file" name="paths[]" class="form-control" multiple>
-                <div class="input-group-btn">
-                    <button class="btn btn-success btn-add-more" type="button"><i class="glyphicon glyphicon-plus"></i> اضافه</button>
-                </div>
             </div>
             <div class="clone hide" style="display: none;">
                 <div class="control-group input-group form-group" style="margin-top:10px">
                     <input type="file" name="paths[]" class="form-control" multiple>
-                    <div class="input-group-btn">
-                        <button class="btn btn-danger btn-remove" type="button"><i class="glyphicon glyphicon-remove"></i> حذف</button>
-                    </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="path">الصوره</label>
                 <input type="file" name="path" class="form-control image">
-            </div>
-            <div class="form-group">
-                <img src="{{asset('uploads/product_images/default.png')}}" class="img-thumbnail image-preview" style="height: 120px">
             </div>
             <div class="form-group">
                 <label for="password">الرقم السري</label>
