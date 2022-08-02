@@ -84,25 +84,11 @@
                 <label for="paths[]">الصور</label>
                 <div class="input-group control-group img_div form-group">
                     <input type="file" name="paths[]" class="form-control image2" multiple>
-                    <div class="input-group-btn">
-                        <button class="btn btn-success btn-add-more" type="button"><i class="glyphicon glyphicon-plus"></i> اضافه</button>
-                    </div>
-                </div>
-            </div>
-            <div class="clone hide" style="display: none;">
-                <div class="control-group input-group form-group" style="margin-top:10px">
-                    <input type="file" name="paths[]" class="form-control" multiple>
-                    <div class="input-group-btn">
-                        <button class="btn btn-danger btn-remove" type="button"><i class="glyphicon glyphicon-remove"></i> حذف</button>
-                    </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="path">الصوره</label>
                 <input type="file" name="path" class="form-control image">
-            </div>
-            <div class="form-group">
-                <img src="{{asset(optional($model->photo)->path)}}" class="img-thumbnail image-preview" style="height: 120px">
             </div>
             <div class="row">
                 <div class="col-md-6">
