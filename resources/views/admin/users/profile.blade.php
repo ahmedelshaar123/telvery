@@ -11,7 +11,7 @@
                                 'action'=>['App\Http\Controllers\Admin\UserController@update_profile',$user->id],
                                 'id'=>'myForm',
                                 'role'=>'form',
-                                'method'=>'post',
+                                'method'=>'PUT',
                                 'files'=>'true'
                                 ])!!}
         <div class="box-body">
