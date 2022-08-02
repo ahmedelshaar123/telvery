@@ -29,7 +29,6 @@
                         <th class="text-center">عمر الشركه</th>
                         <th class="text-center">روابط التواصل الاجتماعي</th>
                         <th class="text-center">التاجر الرئيسي</th>
-
                         <th class="text-center">التفعيل</th>
                         <th class="text-center">تعديل</th>
                         <th class="text-center">حذف</th>
@@ -72,7 +71,7 @@
                                     @endif
                                 </td>
                                 <td class="text-center">
-                                    @if($user->is_Active)
+                                    @if($user->is_active)
                                         <a href="users/{{$user->id}}/deactivated" class="btn btn-danger"><i class="fa fa-close"></i> غير مفعل</a>
                                     @else
                                         <a href="users/{{$user->id}}/activated" class="btn btn-success"><i class="fa fa-check"></i>مفعل </a>
