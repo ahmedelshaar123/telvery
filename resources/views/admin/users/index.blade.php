@@ -22,13 +22,15 @@
                         <th class="text-center">الاسم</th>
                         <th class="text-center">البريد الالكتروني</th>
                         <th class="text-center">الهاتف</th>
-                        <th class="text-center">العنوان</th>
-                        <th class="text-center">الوصف</th>
-                        <th class="text-center">القسم الرئيسي</th>
-                        <th class="text-center">اسم الشركه</th>
-                        <th class="text-center">عمر الشركه</th>
-                        <th class="text-center">روابط التواصل الاجتماعي</th>
-                        <th class="text-center">التاجر الرئيسي</th>
+                        @if(auth()->user()->hasRole('admin'))
+                            <th class="text-center">العنوان</th>
+                            <th class="text-center">الوصف</th>
+                            <th class="text-center">القسم الرئيسي</th>
+                            <th class="text-center">اسم الشركه</th>
+                            <th class="text-center">عمر الشركه</th>
+                            <th class="text-center">روابط التواصل الاجتماعي</th>
+                            <th class="text-center">التاجر الرئيسي</th>
+                        @endif
                         <th class="text-center">التفعيل</th>
                         <th class="text-center">تعديل</th>
                         <th class="text-center">حذف</th>
@@ -48,8 +50,8 @@
                                     $images=$user->photos()->where('type','images')->get();
                                     ?>
                                     @foreach($images as $image)
-                                        <a href="{{asset(optional($image)->path)}}" data-lightbox="{{$image->id}}">
-                                            <img src="{{asset(optional($image)->path)}}" alt="image"
+                                        <a href="{{asset($image->path)}}" data-lightbox="{{$image->id}}">
+                                            <img src="{{asset($image->path)}}" alt="image"
                                                  class="img-circle" width="50" height="50">
                                         </a>
                                     @endforeach
@@ -57,19 +59,21 @@
                                 <td class="text-center">{{$user->name}}</td>
                                 <td class="text-center">{{$user->email}}</td>
                                 <td class="text-center">{{$user->phone}}</td>
-                                <td class="text-center">{{$user->address}}</td>
-                                <td class="text-center">{{$user->desc_ar}}</td>
-                                <td class="text-center">{{optional($user->category)->name_ar}}</td>
-                                <td class="text-center">{{$user->company_name}}</td>
-                                <td class="text-center">{{$user->company_age}}</td>
-                                <td class="text-center">{{$user->facebook_url}}<br>{{$user->google_url}}<br>{{$user->instagram_url}}<br>{{$user->twitter_url}}</td>
-                                <td class="text-center">
-                                    @if(!is_null($user->user))
-                                        {{optional($user->user)->name}}
-                                    @else
-                                        لا يوجد
-                                    @endif
-                                </td>
+                                @if(auth()->user()->hasRole('admin'))
+                                    <td class="text-center">{{$user->address}}</td>
+                                    <td class="text-center">{{$user->desc_ar}}</td>
+                                    <td class="text-center">{{optional($user->category)->name_ar}}</td>
+                                    <td class="text-center">{{$user->company_name}}</td>
+                                    <td class="text-center">{{$user->company_age}}</td>
+                                    <td class="text-center">{{$user->facebook_url}}<br>{{$user->google_url}}<br>{{$user->instagram_url}}<br>{{$user->twitter_url}}</td>
+                                    <td class="text-center">
+                                        @if(!is_null($user->user))
+                                            {{optional($user->user)->name}}
+                                        @else
+                                            لا يوجد
+                                        @endif
+                                    </td>
+                                @endif
                                 <td class="text-center">
                                     @if($user->is_active)
                                         <a href="users/{{$user->id}}/deactivated" class="btn btn-danger"><i class="fa fa-close"></i> غير مفعل</a>

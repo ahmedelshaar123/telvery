@@ -125,7 +125,7 @@ class UserController extends Controller
         if(auth()->user()->hasRole('admin')) {
             $user->syncPermissions($request->permissions);
         }
-        $user->update($request->except('path','paths'));
+        $user->update($request->except('path','paths', 'permissions'));
         if($request->hasFile('paths')) {
             foreach ($user->photos as $photo) {
                 unlink($photo->path);

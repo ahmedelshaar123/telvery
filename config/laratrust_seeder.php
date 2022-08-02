@@ -24,7 +24,7 @@ return [
             'brands' => 'c,r,u,d',
             'categories' => 'c,r,u,d',
             'sub_categories' => 'c,r,u,d',
-            'products' => 'c,r,u,d,s',
+            'products' => 'r,u,d,s',
             'clients' => 'r,s,ac,dc',
             'reviews' => 'r,d',
             'replies' => 's,d',

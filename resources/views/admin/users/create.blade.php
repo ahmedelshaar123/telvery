@@ -282,14 +282,6 @@
                 },function(){
                     $('.password2').attr('type','password');
                 });
-
-                $(".btn-add-more").click(function(){
-                    var html = $(".clone").html();
-                    $(".img_div").after(html);
-                });
-                $("body").on("click",".btn-remove",function(){
-                    $(this).parents(".control-group").remove();
-                });
             });
         </script>
     @endpush
