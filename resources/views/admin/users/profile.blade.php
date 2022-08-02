@@ -36,7 +36,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="email">البريد الالكترةني</label>
+                        <label for="email">البريد الالكتروني</label>
                         {!! Form::email('email',null,[
                             'class'=>'form-control',
                         ]) !!}
@@ -178,13 +178,6 @@
                     $('.password2').attr('type','text');
                 },function(){
                     $('.password2').attr('type','password');
-                });
-                $(".btn-add-more").click(function(){
-                    var html = $(".clone").html();
-                    $(".img_div").after(html);
-                });
-                $("body").on("click",".btn-remove",function(){
-                    $(this).parents(".control-group").remove();
                 });
             });
         </script>
